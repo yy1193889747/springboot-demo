@@ -1,7 +1,6 @@
 package com.cy.service;
 
 import com.cy.entity.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface UserService {
 
     public User getUser(Long id);
 
-    public Boolean deleteUser(Long id);
+    public Long deleteUser(Long id);
 
     public User saveUser(User user);
 

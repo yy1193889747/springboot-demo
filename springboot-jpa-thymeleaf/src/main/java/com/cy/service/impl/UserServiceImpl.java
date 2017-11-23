@@ -5,6 +5,7 @@ import com.cy.repository.UserRepository;
 import com.cy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,19 +27,19 @@ public class UserServiceImpl implements UserService {
     public User getUser(Long id) {
         return userRepository.findByid(id);
     }
-
+    @Transactional
     @Override
-    public Boolean deleteUser(Long id) {
+    public Long deleteUser(Long id) {
         return userRepository.deleteByid(id);
     }
 
     @Override
     public User saveUser(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
     public User editUser(User user) {
-        return null;
+        return userRepository.save(user);
     }
 }

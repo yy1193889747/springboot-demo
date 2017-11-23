@@ -15,9 +15,7 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    @NotBlank(message = "必填字段")
     private String name;
-    @NotBlank(message = "必填字段")
     private String password;
     private String age;
 

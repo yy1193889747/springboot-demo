@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -23,4 +25,30 @@ public class UserController {
     model.addAttribute("userList",userService.userList());
     return "user/userList";
     }
+    @GetMapping(value = "/toEdit")
+    public String getUser(Long id,Model model){
+        model.addAttribute("user", userService.getUser(id));
+        return "user/userEdit";
+    }
+    @PostMapping(value = "/edit")
+    public String editUser(User user){
+        userService.editUser(user);
+        return "redirect:/list";
+    }
+    @GetMapping(value = "/delete")
+    public String deleteUser(Long id){
+        userService.deleteUser(id);
+        return "redirect:/list";
+    }
+    @PostMapping(value = "/add")
+    public String addUser(User user){
+        userService.saveUser(user);
+        return "redirect:/list";
+    }
+    @GetMapping(value = "/toAdd")
+    public String addUser(){
+        return "user/userAdd";
+    }
+
+
 }
