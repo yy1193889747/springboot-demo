@@ -5,13 +5,14 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by cy
  * 2017/11/22 14:05
  */
 @Entity
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
@@ -49,5 +50,15 @@ public class User {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }
