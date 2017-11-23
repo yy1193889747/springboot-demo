@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     public User getUser(Long id) {
         return userRepository.findByid(id);
     }
+
     @Transactional
     @Override
     public Long deleteUser(Long id) {
