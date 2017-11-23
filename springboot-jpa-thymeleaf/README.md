@@ -16,7 +16,7 @@
 ```
 4. 
 # Thymeleaf知识点分享
-              [官方文档----五分钟学会使用Thymeleaf](http://www.thymeleaf.org/doc/articles/standarddialect5minutes.html "官方文档") 
+[官方文档----五分钟学会使用Thymeleaf](http://www.thymeleaf.org/doc/articles/standarddialect5minutes.html "官方文档") 
 1. pom.xml中加入依赖
 ```
     <dependency>
