@@ -12,9 +12,13 @@
 ```   
    @NotEmpty 用在集合类上面 
    @NotBlank 用在String上面 
-   @NotNull 用在基本类型上
+   @NotNull  用在基本类型上
 ```
-4. 
+4. jpa事务管理@Transactional :lollipop:
+```
+   在执行删除操作的时候如果没加事务管理会报错：cannot reliably process 'remove' call 
+   那加到哪里呢，通过百度学习，我加到了service的实现里面。
+```
 # Thymeleaf知识点分享
 [官方文档----五分钟学会使用Thymeleaf](http://www.thymeleaf.org/doc/articles/standarddialect5minutes.html "官方文档") 
 1. pom.xml中加入依赖
@@ -30,7 +34,7 @@
     ##### `${...} : 变量表达式.`
     ##### `*{...} : 选择表达式.`
 # jpa知识点分享
-1. hibernate.hbm2ddl.aut参数的作用:lollipop:
+1. hibernate.hbm2ddl.aut参数的作用 :lollipop:
 ````
     validate        加载hibernate时，验证创建数据库表结构
     create          每次加载hibernate，重新创建数据库表结构，这就是导致数据库表数据丢失的原因。
