@@ -1,3 +1,5 @@
 # Springboot--Making wheels
-## 前言
-   轮子造的不在于多，而在于精。
+## springboot-jpa-thymeleaf
+
+   * 实现增删改查功能
+   * 加入redis缓存
