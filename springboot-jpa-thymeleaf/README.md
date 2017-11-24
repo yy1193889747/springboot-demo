@@ -33,7 +33,7 @@
     ##### `@{...} : 链接表达式.`
     ##### `${...} : 变量表达式.`
     ##### `*{...} : 选择表达式.`
-# jpa知识点分享
+# jpa 知识点分享
 1. hibernate.hbm2ddl.aut参数的作用 :lollipop:
 ````
     validate        加载hibernate时，验证创建数据库表结构
@@ -41,4 +41,5 @@
     create-drop     加载hibernate时创建，退出是删除表结构
     update          加载hibernate自动更新数据库结构（一般使用）
 ````   
+
     
