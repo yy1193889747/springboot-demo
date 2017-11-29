@@ -41,5 +41,31 @@
     create-drop     加载hibernate时创建，退出是删除表结构
     update          加载hibernate自动更新数据库结构（一般使用）
 ````   
-
+# redis 最简单的集成方法
+1. 首先实体类要实现序列化方法
+2. 在业务层注入RedisTemplate对象
+3. 调用相应的方法实现缓存
+```
+        String key = "user_" + id;
+        ValueOperations<String, User> operations = redisTemplate.opsForValue();
+                
+        // 缓存存在
+        boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+             User user = operations.get(key);
+             LOGGER.info("从缓存中获取用户信息>> " + user.toString());
+             return user;
+         }
+        // 插入缓存
+        User user = userRepository.findByid(id);
+        operations.set(key, user, 100, TimeUnit.SECONDS);
+        //删除缓存
+        if (hasKey) {
+             redisTemplate.delete(key);
+             LOGGER.info("从缓存中获取用户信息>> " + user.toString());
+             return user;
+         }
+        
+```
+4. 注意缓存的key保持一致，以及缓存时间设定
     

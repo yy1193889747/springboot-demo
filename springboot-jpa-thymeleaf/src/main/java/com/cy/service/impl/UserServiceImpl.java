@@ -19,12 +19,13 @@ import java.util.concurrent.TimeUnit;
  * 2017/11/22 16:50
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, User> redisTemplate
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -46,15 +47,21 @@ public class UserServiceImpl implements UserService {
         }
         // 插入缓存
         User user = userRepository.findByid(id);
-        operations.set(key, user, 10, TimeUnit.SECONDS);
+        operations.set(key, user, 100, TimeUnit.SECONDS);
         LOGGER.info("用户信息插入缓存 >> " + user.toString());
         return user;
     }
 
-    @Transactional
     @Override
     public Long deleteUser(Long id) {
-        return userRepository.deleteByid(id);
+        Long ret = userRepository.deleteByid(id);
+        String key = "user_" + id;
+        boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+            redisTemplate.delete(key);
+            LOGGER.info("从缓存中删除用户 >> " + id);
+        }
+        return ret;
     }
 
     @Override
@@ -64,6 +71,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User editUser(User user) {
-        return userRepository.save(user);
+        User user1 = userRepository.save(user);
+        String key = "user_" + user.getId();
+        boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+            redisTemplate.delete(key);
+            LOGGER.info("从缓存中删除用户 >> " + user1.toString());
+        }
+        return user1;
     }
 }

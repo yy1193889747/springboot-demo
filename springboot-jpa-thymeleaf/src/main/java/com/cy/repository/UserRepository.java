@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 2017/11/22 16:45
  */
 
-public interface UserRepository extends JpaRepository<User,Long>{
+public interface UserRepository extends JpaRepository<User,Integer>{
 
      User findByid(Long id);
 
