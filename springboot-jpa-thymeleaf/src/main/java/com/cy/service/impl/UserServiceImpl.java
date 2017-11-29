@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RedisTemplate<String, User> redisTemplate
+    private RedisTemplate redisTemplate;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
