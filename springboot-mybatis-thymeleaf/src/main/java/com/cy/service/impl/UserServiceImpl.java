@@ -1,7 +1,7 @@
 package com.cy.service.impl;
 
+import com.cy.dao.UserMapper;
 import com.cy.entity.User;
-import com.cy.repository.UserRepository;
 import com.cy.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper userMapper;
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> userList() {
-        return userRepository.findAll();
+        return userMapper.findAll();
     }
 
     @Override
@@ -46,15 +46,15 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         // 插入缓存
-        User user = userRepository.findByid(id);
+        User user = userMapper.findById(id);
         operations.set(key, user, 100, TimeUnit.SECONDS);
         LOGGER.info("用户信息插入缓存 >> " + user.toString());
         return user;
     }
 
     @Override
-    public Long deleteUser(Long id) {
-        Long ret = userRepository.deleteByid(id);
+    public int deleteUser(Long id) {
+        int ret = userMapper.deleteById(id);
         String key = "user_" + id;
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
@@ -65,19 +65,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public int saveUser(User user) {
+        return userMapper.insert(user);
     }
 
     @Override
-    public User editUser(User user) {
-        User user1 = userRepository.save(user);
+    public int editUser(User user) {
+        int i = userMapper.update(user);
         String key = "user_" + user.getId();
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            LOGGER.info("从缓存中删除用户 >> " + user1.toString());
+            LOGGER.info("从缓存中删除用户 >> " + user.toString());
         }
-        return user1;
+        return i;
     }
 }
