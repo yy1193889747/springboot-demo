@@ -7,3 +7,4 @@
    * 基于xml配置整合mybatis
    * 加入redis缓存（简单）
    * 整合Druid及监控页面
+   * Druid添加多数据源
