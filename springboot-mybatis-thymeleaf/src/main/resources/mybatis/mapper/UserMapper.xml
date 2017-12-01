@@ -7,8 +7,12 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, age, name, password
+  </sql>
   <select id="findAll" resultMap="BaseResultMap" >
-    select *
+    select
+    <include refid="Base_Column_List" />
     from user
   </select>
   <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
