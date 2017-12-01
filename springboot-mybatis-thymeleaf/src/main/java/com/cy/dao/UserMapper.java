@@ -1,6 +1,7 @@
 package com.cy.dao;
 
 import com.cy.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
