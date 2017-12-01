@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface UserService {
 
-    public List<User> userList();
+    List<User> userList();
 
-    public User getUser(Long id);
+    User getUser(Long id);
 
-    public int deleteUser(Long id);
+    int deleteUser(Long id);
 
-    public int saveUser(User user);
+    int saveUser(User user);
 
-    public int editUser(User user);
+    int editUser(User user);
 }
