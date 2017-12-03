@@ -1,4 +1,14 @@
 # 容器配置
+server:
+  port: 8443        # https 端口号，正式 443；测试 8443
+  sslPort: 8080     # http 端口号，正式 80；测试 8080
+  ssl:
+    key-store: classpath:ocly.jks
+    key-password: 704739362
+  undertow:
+    worker-threads: 20
+    buffer-size: 512
+    io-threads: 2
 
 # 默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：
 # 测试环境：java -jar my-spring-boot.jar --spring.profiles.active=test
@@ -6,13 +16,12 @@
 
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
     one:
       url: jdbc:mysql://127.0.0.1/springbootdb?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
       username: root
       password: 0.0001
       driver-class-name: com.mysql.jdbc.Driver
-      max-wait: 20000
+      max-wait: 20000 # 修改各个数据库的超时时间
       max-active: 20
     tow:
       url: jdbc:mysql://127.0.0.1/springbootdb2?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true

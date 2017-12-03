@@ -100,3 +100,22 @@ spring.datasource.druid.two.max-wait=20000
 
 # yml文件的使用注意
 1. yml格式比较严格，当你启动就报错，就要细心检查yml格式是否有误
+
+# 开启HTTPS协议
+1. 需要一个ssl证书，我们使用keytool生产(记住密码)
+```
+    keytool -keystore ocly.jks -genkey -alias tomcat -keyalg RSA
+```
+2. 将ocly.jks文件添加到resource目录下
+3. 添加配置文件
+```
+server:
+  port: 8443        # https 端口号，正式 443；测试 8443
+  sslPort: 8080     # http 端口号，正式 80；测试 8080
+  ssl:
+    key-store: classpath:ocly.jks
+    key-password: 704739362
+```
+4. 添加http端口的监听sslconfig
+5. 实现端口转发http到https （使用的undertow目前没解决）
+
