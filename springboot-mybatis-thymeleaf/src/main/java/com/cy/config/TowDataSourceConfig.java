@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 public class TowDataSourceConfig {
 
     @Bean(name = "towDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.druid.tow")
+    @ConfigurationProperties(prefix = "spring.datasource.tow")
     public DataSource setDataSource() {
         return DruidDataSourceBuilder.create().build();
     }
