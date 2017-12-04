@@ -3,8 +3,8 @@ package com.cy.service.impl;
 import com.cy.dao.UserMapper;
 import com.cy.entity.User;
 import com.cy.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
  * 2017/11/22 16:50
  */
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class.getName());
 
     @Override
     public List<User> userList() {
@@ -53,6 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public int deleteUser(Long id) {
         int ret = userMapper.deleteById(id);
         String key = "user_" + id;
@@ -65,11 +65,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public int saveUser(User user) {
         return userMapper.insert(user);
     }
 
     @Override
+    @Transactional
     public int editUser(User user) {
         int i = userMapper.update(user);
         String key = "user_" + user.getId();

@@ -101,6 +101,11 @@
             <artifactId>spring-jdbc</artifactId>
             <version>4.3.3.RELEASE</version>
         </dependency>
+        <!-- 加上这个才能辨认到log4j2.yml文件 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
     </dependencies>
 
 
