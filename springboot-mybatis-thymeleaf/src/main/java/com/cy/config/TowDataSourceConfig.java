@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * 2017/12/1 10:39
  */
 @Configuration
-@MapperScan(basePackages = "com.cy.dao", sqlSessionTemplateRef = "towSqlSessionTemplate")
+@MapperScan(basePackages = "com.cy.daos", sqlSessionTemplateRef = "towSqlSessionTemplate")
 public class TowDataSourceConfig {
 
     @Bean(name = "towDataSource")
@@ -37,7 +37,7 @@ public class TowDataSourceConfig {
     public SqlSessionFactory testSqlSessionFactory(@Qualifier("towDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/*.xml"));
+       // bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/*.xml"));
         return bean.getObject();
     }
 
