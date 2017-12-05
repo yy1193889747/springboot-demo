@@ -1,3 +1,11 @@
+# 索引
+* [springboot整合mybatis](#springboot整合mybatis)
+* [springboot整合druid加监控页面](#springboot整合druid加监控页面)
+* [springboot整合druid多数据源](#springboot整合druid多数据源)
+* [定制启动页面banner](#定制启动页面banner)
+* [开启HTTPS协议](#开启HTTPS协议)
+* [log4j2配置文件介绍](#log4j2配置文件介绍)
+
 # springboot整合mybatis
 1. 首先pom文件引入包
 ````
@@ -93,7 +101,7 @@ spring.datasource.druid.two.max-wait=20000
 3. 添加各自配置类对DataSource、DataSourceTransactionManager、SqlSessionFactory 、SqlSessionTemplate四个数据项进行配置
 4. 对主数据源使用`@Primary`修饰，必须有且只有一个
 
-# 定制启动页面
+# 定制启动页面banner
 1. [打开页面](http://patorjk.com/software/taag/)，制作文字图片
 2. 在resource目录下添加banner.txt文件
 3. 复制制作好的图片到banner文件里面
@@ -120,7 +128,7 @@ server:
 4. 添加http端口的监听sslconfig
 5. 实现端口转发http到https （使用的undertow目前没解决）
 
-# log4j2 配置文件介绍
+# log4j2配置文件介绍
 [官方文档](http://logging.apache.org/log4j/2.x/manual/configuration.html#YAML)
 1. 通用的6种日志记录级别（低到高）
 * trace：追踪，就是程序推进一下，可以写个trace输出
@@ -149,3 +157,4 @@ server:
 
 4. 编写配置文件yml版（注意pom文件引入包）[详细配置](/springboot-mybatis-thymeleaf/src/main/resources/log4j2.yml)
 5. 为控制台输出添加代码高亮
+6. log记录统一使用占位符形式
