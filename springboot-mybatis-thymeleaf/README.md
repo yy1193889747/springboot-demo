@@ -105,7 +105,7 @@ spring.datasource.druid.two.max-wait=20000
 1. [打开页面](http://patorjk.com/software/taag/)，制作文字图片
 2. 在resource目录下添加banner.txt文件
 3. 复制制作好的图片到banner文件里面
-4. 可以根据喜好，为自己的图案添加颜色[详细配置](/springboot-mybatis-thymeleaf/src/main/resources/banner.txt)
+4. 可以根据喜好，为自己的图案添加控制台输出颜色 [详细配置](/springboot-mybatis-thymeleaf/src/main/resources/banner.txt)
 
 # yml文件的使用注意
 1. yml格式比较严格，当你启动就报错，就要细心检查yml格式是否有误
