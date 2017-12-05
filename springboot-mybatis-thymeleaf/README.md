@@ -131,17 +131,17 @@ server:
 # log4j2配置文件介绍
 [官方文档](http://logging.apache.org/log4j/2.x/manual/configuration.html#YAML)
 1. 通用的6种日志记录级别（低到高）
-* trace：追踪，就是程序推进一下，可以写个trace输出
-* **debug**：调试，一般作为最低级别，trace基本不用。
-* **info**：输出重要的信息，使用较多
-* **warn**：警告，有些信息不是错误信息，但也要给程序员一些提示。
-* **error**：错误信息。用的也很多。
-* fatal：致命错误。
+    * trace：追踪，就是程序推进一下，可以写个trace输出
+    * **debug**：调试，一般作为最低级别，trace基本不用。
+    * **info**：输出重要的信息，使用较多
+    * **warn**：警告，有些信息不是错误信息，但也要给程序员一些提示。
+    * **error**：错误信息。用的也很多。
+    * fatal：致命错误。
 2. 输出源：CONSOLE（输出到控制台）、FILE（输出到文件）、RollingFile（循环输出到文件）
 3. 布局方式
-* SimpleLayout：以简单的形式显示
-* HTMLLayout：以HTML表格显示
-* PatternLayout：自定义形式显示（首选）
+    * SimpleLayout：以简单的形式显示
+    * HTMLLayout：以HTML表格显示
+    * PatternLayout：自定义形式显示（首选）
 
     | 自定义格式|说明          | 
     | ------------- |:-------------:| 
