@@ -29,7 +29,6 @@ public class UserController {
     }
     @PostMapping(value = "/edit")
     public String editUser(User user){
-        System.out.println(user.getName());
         userService.editUser(user);
         return "redirect:/list";
     }

@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class.getName());
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class.getName());
 
     @Override
     public List<User> userList() {
@@ -41,13 +41,13 @@ public class UserServiceImpl implements UserService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             User user = operations.get(key);
-            LOGGER.info("从缓存中获取用户信息>> " + user.toString());
+            logger.info("从缓存中获取用户信息>> " + user.toString());
             return user;
         }
         // 插入缓存
         User user = userMapper.findById(id);
         operations.set(key, user, 100, TimeUnit.SECONDS);
-        LOGGER.info("用户信息插入缓存 >> " + user.toString());
+        logger.info("用户信息插入缓存 >> " + user.toString());
         return user;
     }
 
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            LOGGER.info("从缓存中删除用户 >> " + id);
+            logger.error("从缓存中删除用户 >> " + id);
         }
         return ret;
     }
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            LOGGER.info("从缓存中删除用户 >> " + user.toString());
+            logger.error("从缓存中删除用户 >> " + user.toString());
         }
         return i;
     }
