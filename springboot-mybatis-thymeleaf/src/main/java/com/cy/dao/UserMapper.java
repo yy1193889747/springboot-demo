@@ -9,7 +9,6 @@ import java.util.List;
  * Created by cy
  * 2017/11/30 15:08
  */
-@Mapper
 public interface UserMapper {
     @Delete("DELETE FROM user WHERE `id` = #{id}")
     int deleteById(@Param("id") Long id);

@@ -1,7 +1,7 @@
-# ÈİÆ÷ÅäÖÃ
+# å®¹å™¨é…ç½®
 server:
-  port: 8443        # https ¶Ë¿ÚºÅ£¬ÕıÊ½ 443£»²âÊÔ 8443
-  sslPort: 8080     # http ¶Ë¿ÚºÅ£¬ÕıÊ½ 80£»²âÊÔ 8080
+  port: 8443        # https ç«¯å£å·ï¼Œæ­£å¼ 443ï¼›æµ‹è¯• 8443
+  sslPort: 8080     # http ç«¯å£å·ï¼Œæ­£å¼ 80ï¼›æµ‹è¯• 8080
   ssl:
     key-store: classpath:ocly.jks
     key-password: 704739362
@@ -10,9 +10,9 @@ server:
     buffer-size: 512
     io-threads: 2
 
-# Ä¬ÈÏµÄprofileÎªdev£¬ÆäËû»·¾³Í¨¹ıÖ¸¶¨Æô¶¯²ÎÊıÊ¹ÓÃ²»Í¬µÄprofile£¬±ÈÈç£º
-# ²âÊÔ»·¾³£ºjava -jar my-spring-boot.jar --spring.profiles.active=test
-# Éú²ú»·¾³£ºjava -jar my-spring-boot.jar --spring.profiles.active=prod
+# é»˜è®¤çš„profileä¸ºdevï¼Œå…¶ä»–ç¯å¢ƒé€šè¿‡æŒ‡å®šå¯åŠ¨å‚æ•°ä½¿ç”¨ä¸åŒçš„profileï¼Œæ¯”å¦‚ï¼š
+# æµ‹è¯•ç¯å¢ƒï¼šjava -jar my-spring-boot.jar --spring.profiles.active=test
+# ç”Ÿäº§ç¯å¢ƒï¼šjava -jar my-spring-boot.jar --spring.profiles.active=prod
 
 spring:
   datasource:
@@ -21,7 +21,7 @@ spring:
       username: root
       password: 0.0001
       driver-class-name: com.mysql.jdbc.Driver
-      max-wait: 20000 # ĞŞ¸Ä¸÷¸öÊı¾İ¿âµÄ³¬Ê±Ê±¼ä
+      max-wait: 20000 # ä¿®æ”¹å„ä¸ªæ•°æ®åº“çš„è¶…æ—¶æ—¶é—´
       max-active: 20
     tow:
       url: jdbc:mysql://127.0.0.1/springbootdb2?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
@@ -30,23 +30,22 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
       max-wait: 50000
     druid:
-      max-active: 10 # ³õÊ¼»¯´óĞ¡£¬×îĞ¡£¬×î´óÁ´½ÓÊı
+      max-active: 10 # åˆå§‹åŒ–å¤§å°ï¼Œæœ€å°ï¼Œæœ€å¤§é“¾æ¥æ•°
       min-idle: 3
       initial-size: 3
-      max-wait: 60000 # Á¬½Ó³¬Ê±Ê±¼ä
-      stat-view-servlet: #¼à¿ØÆ½Ì¨ÉèÖÃ
+      max-wait: 60000 # è¿æ¥è¶…æ—¶æ—¶é—´
+      stat-view-servlet: #ç›‘æ§å¹³å°è®¾ç½®
         login-username: admin
         login-password: admin
       filter:
-        stat: # ÏÔÊ¾Âısql
+        stat: # æ˜¾ç¤ºæ…¢sql
           log-slow-sql: true
           slow-sql-millis: 2000
 
-# È¡Ïûthymeleaf»º´æ
+# å–æ¶ˆthymeleafç¼“å­˜
   thymeleaf:
     cache: false
-# Redis ÅäÖÃ
+# Redis é…ç½®
   redis:
     host: localhost
     password:
-

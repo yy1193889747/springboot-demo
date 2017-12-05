@@ -21,3 +21,10 @@ Loggers:
       level: info
       AppenderRef:
         - ref: CONSOLE
+    Logger: # 为com.cy包配置特殊的Log级别，方便调试
+        - name: com.cy
+          additivity: false
+          level: info
+          AppenderRef:
+            - ref: CONSOLE
+            - ref: ROLLING_FILE
