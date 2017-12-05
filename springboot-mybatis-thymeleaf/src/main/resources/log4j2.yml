@@ -4,7 +4,8 @@ Configuration:
       name: CONSOLE # Appender命名
       target: SYSTEM_OUT
       PatternLayout: # 选用自定义配置方式
-        pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
+        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS}: %highlight{%4p} %t (%style{%F:%L}{Cyan}) - %m%n{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}"
+        # "%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36}.%M() @%L - %msg%n}{FATAL=Bright Red, ERROR=Bright Magenta, WARN=Bright Yellow, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White}
     RollingFile:  # 输出到文件
       -
         name: ROLLING_FILE

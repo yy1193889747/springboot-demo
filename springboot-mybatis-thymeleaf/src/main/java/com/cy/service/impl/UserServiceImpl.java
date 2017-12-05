@@ -3,6 +3,7 @@ package com.cy.service.impl;
 import com.cy.dao.UserMapper;
 import com.cy.entity.User;
 import com.cy.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * 2017/11/22 16:50
  */
 @Service
+@Log4j2
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -26,7 +28,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class.getName());
 
     @Override
     public List<User> userList() {
@@ -41,13 +42,13 @@ public class UserServiceImpl implements UserService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             User user = operations.get(key);
-            logger.info("从缓存中获取用户信息>> " + user.toString());
+            log.info("从缓存中获取用户信息>>{} ", user.toString());
             return user;
         }
         // 插入缓存
         User user = userMapper.findById(id);
         operations.set(key, user, 100, TimeUnit.SECONDS);
-        logger.info("用户信息插入缓存 >> " + user.toString());
+        log.info("用户信息插入缓存 >>{} ", user.toString());
         return user;
     }
 
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            logger.error("从缓存中删除用户 >> " + id);
+            log.error("从缓存中删除用户 >>{} ", id);
         }
         return ret;
     }
@@ -78,7 +79,7 @@ public class UserServiceImpl implements UserService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            logger.error("从缓存中删除用户 >> " + user.toString());
+            log.error("从缓存中删除用户 >> {}", user.toString());
         }
         return i;
     }
