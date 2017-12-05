@@ -146,4 +146,4 @@ server:
 | %L     | 代码中的行数      |
 | %n     | 换行     |
 
-4. 编写配置文件yml版（注意pom文件引入包）[详细配置](/src/main/resources/log4j2.yml)
+4. 编写配置文件yml版（注意pom文件引入包）[详细配置](/springboot-mybatis-thymeleaf/src/main/resources/log4j2.yml)
