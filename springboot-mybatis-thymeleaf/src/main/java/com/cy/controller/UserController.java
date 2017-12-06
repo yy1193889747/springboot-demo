@@ -35,7 +35,7 @@ public class UserController {
     @GetMapping(value = "/list")
     public String userList(Model model) {
         model.addAttribute("userList", userService.userList());
-        return "user/userList";
+        return "data";
     }
 
     @GetMapping(value = "/toEdit")
