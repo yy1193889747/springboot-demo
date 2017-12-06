@@ -16,9 +16,5 @@ public class Application {
 
 	}
 
-	@GetMapping(value ="/")
-		public String index(){
-		return "redirect:/list";
-			}
 
 }

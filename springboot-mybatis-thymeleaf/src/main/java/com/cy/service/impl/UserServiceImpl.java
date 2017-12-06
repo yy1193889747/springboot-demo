@@ -83,4 +83,10 @@ public class UserServiceImpl implements UserService {
         }
         return i;
     }
+
+    @Override
+    public User login(User user) {
+        log.info("用户名：{}，密码：{}",user.getName(),user.getPassword());
+        return userMapper.findByUser(user);
+    }
 }

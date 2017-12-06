@@ -19,4 +19,6 @@ public interface UserService {
     int saveUser(User user);
 
     int editUser(User user);
+
+    User login(User user);
 }

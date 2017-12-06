@@ -17,33 +17,53 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-@GetMapping(value = "/list")
-    public String userList(Model model){
-    model.addAttribute("userList",userService.userList());
-    return "user/userList";
+    @GetMapping(value = "/")
+    public String login() {
+        return "login";
     }
+
+    @PostMapping(value = "/login")
+    public String login(User user, Model model) {
+        User loginuser = userService.login(user);
+        if (loginuser != null) {
+            return "redirect:/list";
+        }
+        model.addAttribute("message", "用户名密码错误");
+        return "login";
+    }
+
+    @GetMapping(value = "/list")
+    public String userList(Model model) {
+        model.addAttribute("userList", userService.userList());
+        return "user/userList";
+    }
+
     @GetMapping(value = "/toEdit")
-    public String getUser(Long id,Model model){
+    public String getUser(Long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         return "user/userEdit";
     }
+
     @PostMapping(value = "/edit")
-    public String editUser(User user){
+    public String editUser(User user) {
         userService.editUser(user);
         return "redirect:/list";
     }
+
     @GetMapping(value = "/delete")
-    public String deleteUser(Long id){
+    public String deleteUser(Long id) {
         userService.deleteUser(id);
         return "redirect:/list";
     }
+
     @PostMapping(value = "/add")
-    public String addUser(User user){
+    public String addUser(User user) {
         userService.saveUser(user);
         return "redirect:/list";
     }
+
     @GetMapping(value = "/toAdd")
-    public String addUser(){
+    public String addUser() {
         return "user/userAdd";
     }
 

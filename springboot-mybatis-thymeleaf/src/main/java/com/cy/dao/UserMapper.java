@@ -24,4 +24,7 @@ public interface UserMapper {
 
     @Update("UPDATE user SET name = #{name}, password = #{password}, age = #{age}  WHERE id = #{id}")
     int update(User user);
+
+    @Select("SELECT * FROM user WHERE `name` = #{name} AND `password` = #{password}")
+    User findByUser(User user);
 }
