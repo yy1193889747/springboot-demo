@@ -33,11 +33,14 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg" th:text="${message}" style="color: #cc4400"></p>
+    <div th:if="${param.error}">
+      <p class="login-box-msg" style="color: #cc4400">用户名或密码错</p>
+    </div>
+
 
     <form  th:action="@{/login}"  method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" name="name"/>
+        <input type="text" class="form-control" placeholder="Username" name="username"/>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

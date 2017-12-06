@@ -5,6 +5,7 @@
 * [定制启动页面banner](#定制启动页面banner)
 * [开启HTTPS协议](#开启HTTPS协议)
 * [log4j2配置文件介绍](#log4j2配置文件介绍)
+* [spring-security简单的使用](#spring-security简单的使用)
 
 # springboot整合mybatis
 1. 首先pom文件引入包
@@ -158,3 +159,16 @@ server:
 4. 编写配置文件yml版（注意pom文件引入包）[详细配置](/springboot-mybatis-thymeleaf/src/main/resources/log4j2.yml)
 5. 为控制台输出添加代码高亮
 6. log记录统一使用占位符形式
+
+# spring-security简单的使用
+  实现内存中验证,只有验证通过才能访问/list页面
+1. 首先pom文件引入包
+````
+<!--security-->
+<dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+````
+2. 添加类SecurityConfig
+3. 使用内存中的身份验证

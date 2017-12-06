@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by cy
@@ -22,17 +23,12 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping(value = "/login")
-    public String login(User user, Model model) {
-        User loginuser = userService.login(user);
-        if (loginuser != null) {
-            return "redirect:/list";
-        }
-        model.addAttribute("message", "用户名密码错误");
+    @RequestMapping(value = "/login")
+    public String logins() {
         return "login";
     }
 
-    @GetMapping(value = "/list")
+    @RequestMapping(value = "/list")
     public String userList(Model model) {
         model.addAttribute("userList", userService.userList());
         return "data";
