@@ -27,4 +27,7 @@ public interface UserMapper {
 
     @Select("SELECT * FROM user WHERE `name` = #{name} AND `password` = #{password}")
     User findByUser(User user);
+
+    @Select("SELECT * FROM user WHERE `name` = #{name}")
+    User findByUsername(@Param("name") String name);
 }

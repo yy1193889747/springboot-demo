@@ -172,3 +172,8 @@ server:
 ````
 2. 添加类SecurityConfig
 3. 使用内存中的身份验证
+4. 使用数据库验证：
+  * 用户类实现UserDetails，并重写方法（没对角色处理）
+  * 新建LoginService继承UserDetailsService类，重写方法
+  * 对类[SecurityConfig](/springboot-mybatis-thymeleaf/src/main/java/com/cy/config/SecurityConfig.java)进行修改
+5. 注意：之前配置的Druid监控页面类会失效

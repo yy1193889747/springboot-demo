@@ -23,11 +23,6 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = "/login")
-    public String logins() {
-        return "login";
-    }
-
     @RequestMapping(value = "/list")
     public String userList(Model model) {
         model.addAttribute("userList", userService.userList());
