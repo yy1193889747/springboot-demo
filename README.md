@@ -9,7 +9,7 @@
    * Druid添加多数据源
    * 使用yml格式更改配置文件
    * 增加https协议,使用undertow容器
-   * 增加log4j2日志记录
+   * 增加log4j2日志记录,使用lombok简化代码
    * 基于注解配置mapper
    * 2017-12-05 ：将error级别日志单独记录,添加控制台高亮
    * 2017-12-06 ：添加登录界面,使用spring security简单的内存控制
