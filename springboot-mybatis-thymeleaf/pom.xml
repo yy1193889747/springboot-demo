@@ -40,7 +40,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!-- Web 容器 undertow -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -112,8 +111,6 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>

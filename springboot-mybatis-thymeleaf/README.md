@@ -6,7 +6,7 @@
 * [开启HTTPS协议](#开启HTTPS协议)
 * [log4j2配置文件介绍](#log4j2配置文件介绍)
 * [spring-security简单的使用](#spring-security简单的使用)
-* [@Scheduled定时任务](#@Scheduled定时任务)
+* [Scheduled定时任务](#Scheduled定时任务)
 
 # springboot整合mybatis
 1. 首先pom文件引入包
@@ -178,7 +178,7 @@ server:
   * 新建LoginService继承UserDetailsService类，重写方法
   * 对类[SecurityConfig](/springboot-mybatis-thymeleaf/src/main/java/com/cy/config/SecurityConfig.java)进行修改
 5. 注意：之前配置的Druid监控页面类会失效
-# @Scheduled定时任务
+# Scheduled定时任务
 1. 启动类加入@EnableScheduling注解
 2. 编写定时任务，必须是无返回方法
 3. 定时任务参数设置
