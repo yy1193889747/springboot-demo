@@ -15,3 +15,4 @@
    * 2017-12-06 ：添加登录界面,使用spring security简单的内存控制
    * 2017-12-06 ：使用spring security由数据库控制
    * 2017-12-07 ：定时任务@Scheduled,开启异步Async
+   * 2017-12-07 ：添加swagger接口文档生成器

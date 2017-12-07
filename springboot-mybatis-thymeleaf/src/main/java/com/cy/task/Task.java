@@ -3,11 +3,13 @@ package com.cy.task;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by cy
  * 2017/12/7 13:34
  */
+@Component
 @Log4j2
 public class Task {
 
