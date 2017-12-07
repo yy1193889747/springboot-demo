@@ -44,7 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and().portMapper().http(80).mapsTo(443)
+                .and().csrf().disable();
         http.rememberMe().alwaysRemember(true);
 
 //                //设置默认登录成功跳转页面

@@ -19,11 +19,16 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/")
+    public String loginpage() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/login")
     public String login() {
         return "login";
     }
 
-    @RequestMapping(value = "/list")
+    @GetMapping(value = "/list")
     public String userList(Model model) {
         model.addAttribute("userList", userService.userList());
         return "data";
