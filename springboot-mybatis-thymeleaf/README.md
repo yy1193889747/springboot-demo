@@ -6,8 +6,8 @@
 * [开启HTTPS协议](#开启HTTPS协议)
 * [log4j2配置文件介绍](#log4j2配置文件介绍)
 * [spring-security简单的使用](#spring-security简单的使用)
-* [Scheduled定时任务](#Scheduled定时任务)
-* [Async异步执行](#Async异步执行)
+* [Scheduled定时任务](#scheduled定时任务)
+* [Async异步执行](#async异步执行)
 
 # springboot整合mybatis
 1. 首先pom文件引入包
@@ -179,16 +179,16 @@ server:
   * 新建LoginService继承UserDetailsService类，重写方法
   * 对类[SecurityConfig](/springboot-mybatis-thymeleaf/src/main/java/com/cy/config/SecurityConfig.java)进行修改
 5. 注意：之前配置的Druid监控页面类会失效
-# Scheduled定时任务
+# scheduled定时任务
 1. 启动类加入@EnableScheduling注解
 2. 编写定时任务，必须是无返回方法
 3. 定时任务参数设置
   * fixedRate = 5 * 1000 上一次开始执行时间点之后5秒再执行
   * fixedDelay = 5 * 1000 上一次执行完毕时间点之后5秒再执行
   * initialDelay = 1000, fixedRate = 5000 第一次延迟1秒后执行，之后按fixedRate的规则每5秒执行一次
-  * cron="*/5 * * * * *" 每5秒执行一次[在线cron表达式生成](http://cron.qqe2.com/)
+  * cron="*/5 * * * * *" 每5秒执行一次 [在线cron表达式生成](http://cron.qqe2.com/)
 
-# Async异步执行
+# async异步执行
 1. 启动类加入@EnableAsync注解，开启异步功能
 2. 类方法加入@Async注解：注：（不能定义为static类型
 3. 如果需要判断异步是否执行完成，需要使用Future<T>来返回异步调用的结果
