@@ -93,7 +93,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -142,7 +142,7 @@
                 </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                        <li class="active"><a th:href="@{/list}"><i class="fa fa-circle-o"></i> Data tables</a></li>
                     </ul>
                 </li>
             </ul>

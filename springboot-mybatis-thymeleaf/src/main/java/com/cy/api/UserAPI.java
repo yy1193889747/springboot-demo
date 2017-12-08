@@ -21,13 +21,13 @@ public class UserAPI {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "获取用户列表", notes = "sssswww")
+    @ApiOperation(value = "获取用户列表", notes = "获取用户列表所有信息")
     @GetMapping("/api/user")
     public List<User> getAll() {
         return userService.userList();
     }
 
-    @ApiOperation(value = "通过Id获取用户信息", notes = "ssss")
+    @ApiOperation(value = "通过Id获取用户信息", notes = "通过Id获取用户信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @GetMapping("/api/user/{id}")
     public User getById(@PathVariable Long id) {
