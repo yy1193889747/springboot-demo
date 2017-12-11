@@ -25,6 +25,9 @@ public class Task {
     private AsyncTask asyncTask;
 
     private final static String URL = "http://top.baidu.com/buzz?b=341&c=513&fr=topbuzz_b1";
+    private final static String URL_IP = "http://www.data5u.com/";
+    private final static String USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Mobile Safari/537.36";
+
 
     /**
      * 测试
@@ -39,24 +42,27 @@ public class Task {
     }
 
     /**
-     * 10分钟执行一次
+     * 代理Ip爬取
+     */
+    @Scheduled(fixedRate = 10 * 60 * 1000)
+    public void ipProxy() throws Exception {
+        Document doc = Jsoup.connect(URL_IP).userAgent(USER_AGENT).get();
+        Elements ips = doc.select("body > div:nth-child(8) > ul > li:nth-child(2) > ul.l2").next();
+        for (int i = 0; i <= ips.size(); i++) {
+            String ipaddr = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(1) > li").text();
+            String proxy = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(2) > li").text();
+            String speed = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(8) > li").text();
+
+            log.info("ip: {}----端口: {} ----速度：{} ", ipaddr, proxy, speed);
+
+        }
+    }
+
+    /**
+     * 百度今日热点爬取
      */
     @Scheduled(fixedRate = 10 * 60 * 1000)
     public void baidu() throws Exception {
-        Document doc = Jsoup.connect(URL).get();
-        Elements news = doc.select("#main > div.mainBody > div > table > tbody > tr");
-        for (Element newa : news) {
-            String flag = "";
-            String hot = doc.attr("icon-rise");
-
-            log.info("关键字: {}----热度：{} ", flag, hot);
-        }
-
-
-    }
-
-    public static void main(String[] args) throws IOException {
-
         Document doc = Jsoup.connect(URL).get();
         Elements news = doc.select("#main > div.mainBody > div > table > tbody > tr").next();
         for (Element newa : news) {
@@ -65,7 +71,13 @@ public class Task {
             String hot = newa.select("td.last > span").text();
 
             log.info("关键字: {}----地址: {} ----热度：{} ", flag, url, hot);
+
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Task task = new Task();
+        task.ipProxy();
 
     }
     // @Scheduled(cron="0/5 * *  * * ? ") //每5秒执行一次
