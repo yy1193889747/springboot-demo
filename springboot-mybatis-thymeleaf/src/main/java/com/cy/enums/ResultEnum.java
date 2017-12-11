@@ -1,6 +1,5 @@
 package com.cy.enums;
 
-import lombok.Data;
 
 /**
  * Created by cy
@@ -8,13 +7,16 @@ import lombok.Data;
  */
 public enum ResultEnum {
 
-    UNKNOW_ERROR(-1,"未知错误"),;
-
+    UNKNOW_ERROR(-1,"未知错误"),
+    NO_ACCESS(-2,"拒绝访问"),
+    SUCCESS(0, "成功")
+    ;
 
 
     private Integer code;
 
     private String msg;
+
     ResultEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
