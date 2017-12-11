@@ -1,9 +1,17 @@
 package com.cy.task;
 
+import com.mysql.jdbc.PerVmServerConfigCacheFactory;
 import lombok.extern.log4j.Log4j2;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.Formatter;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 /**
  * Created by cy
@@ -15,16 +23,50 @@ public class Task {
 
     @Autowired
     private AsyncTask asyncTask;
+
+    private final static String URL = "http://top.baidu.com/buzz?b=341&c=513&fr=topbuzz_b1";
+
     /**
-     * 5分钟执行一次
+     * 测试
      */
     @Scheduled(fixedRate = 60 * 60 * 1000)
-    public void reportCurrentTime() throws Exception{
+    public void reportCurrentTime() throws Exception {
         long start = System.currentTimeMillis();
         asyncTask.taskOne();
         asyncTask.taskTwo();
         long end = System.currentTimeMillis();
-        log.info("总耗时：{} 毫秒", end-start);
+        log.info("总耗时：{} 毫秒", end - start);
+    }
+
+    /**
+     * 10分钟执行一次
+     */
+    @Scheduled(fixedRate = 10 * 60 * 1000)
+    public void baidu() throws Exception {
+        Document doc = Jsoup.connect(URL).get();
+        Elements news = doc.select("#main > div.mainBody > div > table > tbody > tr");
+        for (Element newa : news) {
+            String flag = "";
+            String hot = doc.attr("icon-rise");
+
+            log.info("关键字: {}----热度：{} ", flag, hot);
+        }
+
+
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        Document doc = Jsoup.connect(URL).get();
+        Elements news = doc.select("#main > div.mainBody > div > table > tbody > tr").next();
+        for (Element newa : news) {
+            String flag = newa.select("td.keyword > a.list-title").text();
+            String url = newa.select("td.keyword > a.list-title").attr("href");
+            String hot = newa.select("td.last > span").text();
+
+            log.info("关键字: {}----地址: {} ----热度：{} ", flag, url, hot);
+        }
+
     }
     // @Scheduled(cron="0/5 * *  * * ? ") //每5秒执行一次
     // "0 0 12 * * ?" 每天中午十二点触发

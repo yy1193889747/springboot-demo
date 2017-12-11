@@ -169,7 +169,7 @@
     ````
     <!--security-->
     <dependency>
-        <groupId>org.springframework.boot</groupId>
+        <groupId>org.springfragmework.boot</groupId>
         <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     ````
