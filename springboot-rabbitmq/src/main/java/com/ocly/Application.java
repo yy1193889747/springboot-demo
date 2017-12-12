@@ -2,6 +2,7 @@ package com.ocly;
 
 import com.ocly.modle.User;
 import com.ocly.rabbit.ObjSender;
+import com.ocly.rabbit.Sender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class Application {
     @Autowired
     private ObjSender sender;
+    @Autowired
+    private Sender send;
 
     public static void main(String[] args) {
 
@@ -25,5 +28,15 @@ public class Application {
         user.setAge(18);
         user.setName("ocly");
         sender.send(user);
+    }
+
+    @GetMapping(value = "/topic/one")
+    public void hellotopic() {
+        send.topicSendOne();
+    }
+
+    @GetMapping(value = "/topic/two")
+    public void topictwo() {
+        send.topicSendTwo();
     }
 }

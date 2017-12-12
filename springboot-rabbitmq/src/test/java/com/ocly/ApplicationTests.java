@@ -35,6 +35,11 @@ public class ApplicationTests {
 
 	@Test
 	public void topic() throws Exception {
-		sender.topicSendone();
+		sender.topicSendOne();
+	}
+
+	@Test
+	public void fanout() throws Exception {
+		sender.fanoutSend();
 	}
 }

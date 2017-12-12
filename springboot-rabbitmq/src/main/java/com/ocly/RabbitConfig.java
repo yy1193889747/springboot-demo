@@ -1,9 +1,6 @@
 package com.ocly;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,6 +20,9 @@ public class RabbitConfig {
     public Queue ObjectQueue() {
         return new Queue("user",false);
     }
+    /**
+     * 主题模式 更灵活
+     */
     @Bean
     public Queue topicone() {
         return new Queue("topic.one",false);
@@ -50,4 +50,42 @@ public class RabbitConfig {
         return BindingBuilder.bind(topictwo).to(exchange).with("topic.#");
     }
 
+
+    /**
+     * 发布订阅模式
+     */
+    @Bean
+    public Queue AMessage() {
+        return new Queue("fanout.A");
+    }
+
+    @Bean
+    public Queue BMessage() {
+        return new Queue("fanout.B");
+    }
+
+    @Bean
+    public Queue CMessage() {
+        return new Queue("fanout.C");
+    }
+
+    @Bean
+    FanoutExchange fanoutExchange() {
+        return new FanoutExchange("fanoutExchange");
+    }
+
+    @Bean
+    Binding bindingExchangeA(Queue AMessage,FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(AMessage).to(fanoutExchange);
+    }
+
+    @Bean
+    Binding bindingExchangeB(Queue BMessage, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(BMessage).to(fanoutExchange);
+    }
+
+    @Bean
+    Binding bindingExchangeC(Queue CMessage, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(CMessage).to(fanoutExchange);
+    }
 }

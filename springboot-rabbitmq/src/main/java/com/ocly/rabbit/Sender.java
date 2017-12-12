@@ -22,7 +22,7 @@ public class Sender {
     }
 
 
-    public void topicSendone() {
+    public void topicSendOne() {
         String context = "hello topicSendone";
         System.out.println("sender>>>" + context);
         this.rabbitTemplate.convertAndSend("topicexchange","topic.one",context);
@@ -34,4 +34,12 @@ public class Sender {
         this.rabbitTemplate.convertAndSend("topicexchange","topic.two",context);
     }
 
+    /**
+     * 发布订阅模式
+     */
+    public void fanoutSend() {
+        String context = "hello fanout";
+        System.out.println("sender>>>" + context);
+        this.rabbitTemplate.convertAndSend("fanoutExchange","",context);
+    }
 }
