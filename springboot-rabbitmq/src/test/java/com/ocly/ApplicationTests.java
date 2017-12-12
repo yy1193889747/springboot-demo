@@ -1,5 +1,7 @@
 package com.ocly;
 
+import com.ocly.modle.User;
+import com.ocly.rabbit.ObjSender;
 import com.ocly.rabbit.Sender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +15,21 @@ public class ApplicationTests {
 
 	@Autowired
 	private Sender sender;
+	@Autowired
+	private ObjSender objSender;
 
 	@Test
 	public void hello() throws Exception {
-		sender.send();
+		for (int i = 0; i < 10 ; i++) {
+			sender.send();
+		}
+	}
+
+	@Test
+	public void user() throws Exception {
+		User user = new User();
+		user.setAge(18);
+		user.setName("ocly");
+		objSender.send(user);
 	}
 }

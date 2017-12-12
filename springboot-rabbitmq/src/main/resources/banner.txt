@@ -1,0 +1,12 @@
+${AnsiColor.RED}${AnsiStyle.ITALIC}I'm Red and italic ${AnsiStyle.NORMAL}${AnsiColor.DEFAULT}
+${AnsiColor.BLUE}${AnsiBackground.YELLOW}I'm Blue with yellow background${AnsiBackground.DEFAULT}${AnsiColor.DEFAULT}
+${AnsiColor.GREEN}Powered by ${spring-boot.formatted-version}${AnsiColor.DEFAULT}
+${AnsiColor.BLUE}
+ ██████╗  ██████╗██╗  ██╗   ██╗
+██╔═══██╗██╔════╝██║  ╚██╗ ██╔╝
+██║   ██║██║     ██║   ╚████╔╝
+██║   ██║██║     ██║    ╚██╔╝
+╚██████╔╝╚██████╗███████╗██║
+ ╚═════╝  ╚═════╝╚══════╝╚═╝
+
+${AnsiColor.BRIGHT_GREEN}Spring Boot>>>>> ${spring-boot.formatted-version}

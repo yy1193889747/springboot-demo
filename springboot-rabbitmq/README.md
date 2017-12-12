@@ -12,4 +12,5 @@
         <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
 ```
-8. 添加类
+8. 添加类, **注:(** 一对多是平均消费
+9. 发送对象时, **注:(** 对象实现序列化

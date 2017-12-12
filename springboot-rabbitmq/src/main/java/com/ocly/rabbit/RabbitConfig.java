@@ -16,4 +16,9 @@ public class RabbitConfig {
         return new Queue("hello",false);
     }
 
+    @Bean
+    public Queue ObjectQueue() {
+        return new Queue("user",false);
+    }
+
 }

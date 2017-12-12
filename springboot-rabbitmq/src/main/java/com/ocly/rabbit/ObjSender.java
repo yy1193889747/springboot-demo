@@ -2,7 +2,6 @@ package com.ocly.rabbit;
 
 import com.ocly.modle.User;
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +10,13 @@ import org.springframework.stereotype.Component;
  * 2017/12/12 10:06
  */
 @Component
-public class Sender {
+public class ObjSender {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void send() {
-        String context = "hello world";
-        System.out.println("sender>>>" + context);
-        this.rabbitTemplate.convertAndSend("hello", context);
+    public void send(User user) {
+        System.out.println("senderobj>>>" + user.toString());
+        this.rabbitTemplate.convertAndSend("user", user);
     }
 
 
