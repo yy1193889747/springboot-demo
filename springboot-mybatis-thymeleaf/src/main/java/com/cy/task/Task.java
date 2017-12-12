@@ -52,9 +52,7 @@ public class Task {
             String ipaddr = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(1) > li").text();
             String proxy = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(2) > li").text();
             String speed = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(8) > li").text();
-
             log.info("ip: {}----端口: {} ----速度：{} ", ipaddr, proxy, speed);
-
         }
     }
 

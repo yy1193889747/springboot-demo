@@ -9,6 +9,7 @@
 * [Scheduled定时任务](#scheduled定时任务)
 * [Async异步执行](#async异步执行)
 * [Swagger接口文档生成](#swagger接口文档生成)
+* [jsoup简单爬取代理ip](#jsoup简单爬取代理ip)
 
 # springboot整合mybatis
 1. 首先pom文件引入包
@@ -210,3 +211,36 @@
    ````
 2. 添加[Swagger](/springboot-mybatis-thymeleaf/src/main/java/com/cy/Swagger.java)配置类
 3. 给Api接口添加注解 注：（/user/{id} ,参数设置加入paramType = "path"
+
+# jsoup简单爬取代理ip
+1. 简单看看jsoup[入门教程](http://www.open-open.com/jsoup/)
+
+2. 新建一个springboot项目
+
+3. maven引入依赖
+
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.10.2</version>
+		</dependency>
+
+4. 寻找爬取目标，百度代理ip即可 `http://www.data5u.com/`
+
+5. 分析网页，模拟请求，发现只需User-Agent即可访问到页面内容
+
+6. 创建dom对象，通过select选择器完成爬取
+     
+		public void ipProxy() throws Exception {
+       		Document doc = Jsoup.connect(URL_IP).userAgent(USER_AGENT).get();
+       		Elements ips = doc.select("body > div:nth-child(8) > ul > li:nth-child(2) > ul.l2").next();
+      	  	for (int i = 0; i <= ips.size(); i++) {
+           		String ipaddr = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(1) > li").text();
+            	String proxy = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(2) > li").text();
+            	String speed = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(8) > li").text();
+            	log.info("ip: {}----端口: {} ----速度：{} ", ipaddr, proxy, speed);
+        	}
+   		 }
+7. select选择器使用技巧，Chrome浏览器F12>选中元素>右键>copy selector即可
+
+[源码分享](https://github.com/yy1193889747/springboot-demo/blob/master/springboot-mybatis-thymeleaf/src/main/java/com/cy/task/Task.java)
