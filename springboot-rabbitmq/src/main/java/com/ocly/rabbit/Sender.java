@@ -22,4 +22,16 @@ public class Sender {
     }
 
 
+    public void topicSendone() {
+        String context = "hello topicSendone";
+        System.out.println("sender>>>" + context);
+        this.rabbitTemplate.convertAndSend("topicexchange","topic.one",context);
+    }
+
+    public void topicSendTwo() {
+        String context = "hello topicSendTwo";
+        System.out.println("sender>>>" + context);
+        this.rabbitTemplate.convertAndSend("topicexchange","topic.two",context);
+    }
+
 }

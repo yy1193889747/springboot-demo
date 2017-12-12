@@ -32,4 +32,9 @@ public class ApplicationTests {
 		user.setName("ocly");
 		objSender.send(user);
 	}
+
+	@Test
+	public void topic() throws Exception {
+		sender.topicSendone();
+	}
 }
