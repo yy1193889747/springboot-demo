@@ -1,0 +1,4 @@
+spring:
+  rabbitmq:
+    username: ocly
+    password: 123456
