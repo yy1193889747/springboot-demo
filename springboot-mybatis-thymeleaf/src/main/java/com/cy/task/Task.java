@@ -9,9 +9,11 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.Proxy;
 
 /**
  * Created by cy
@@ -26,6 +28,7 @@ public class Task {
 
     private final static String URL = "http://top.baidu.com/buzz?b=341&c=513&fr=topbuzz_b1";
     private final static String URL_IP = "http://www.data5u.com/";
+    private final static String URL_BLOG = "http://blog.csdn.net/yy1193889747/article/details/78785776";
     private final static String USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Mobile Safari/537.36";
 
 
@@ -45,21 +48,29 @@ public class Task {
      * 代理Ip爬取
      */
     @Scheduled(fixedRate = 10 * 60 * 1000)
-    public void ipProxy() throws Exception {
+    public void ipProxy() throws IOException {
         Document doc = Jsoup.connect(URL_IP).userAgent(USER_AGENT).get();
         Elements ips = doc.select("body > div:nth-child(8) > ul > li:nth-child(2) > ul.l2").next();
+        log.info("ip个数：{}",ips.size());
         for (int i = 0; i <= ips.size(); i++) {
             String ipaddr = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(1) > li").text();
             String proxy = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(2) > li").text();
             String speed = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(8) > li").text();
             log.info("ip: {}----端口: {} ----速度：{} ", ipaddr, proxy, speed);
+            if(!"".equals(proxy)){
+                try {
+                    Jsoup.connect(URL_BLOG).proxy(ipaddr,Integer.parseInt(proxy)).ignoreHttpErrors(false).timeout(3000).get();
+                } catch (IOException e) {
+                    log.info("不能用") ;
+                }
+            }
         }
     }
 
     /**
      * 百度今日热点爬取
      */
-    @Scheduled(fixedRate = 10 * 60 * 1000)
+    @Scheduled(fixedRate = 60 * 60 * 1000)
     public void baidu() throws Exception {
         Document doc = Jsoup.connect(URL).get();
         Elements news = doc.select("#main > div.mainBody > div > table > tbody > tr").next();
