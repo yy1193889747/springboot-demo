@@ -230,17 +230,16 @@
 5. 分析网页，模拟请求，发现只需User-Agent即可访问到页面内容
 
 6. 创建dom对象，通过select选择器完成爬取
-     
-		public void ipProxy() throws Exception {
-       		Document doc = Jsoup.connect(URL_IP).userAgent(USER_AGENT).get();
-       		Elements ips = doc.select("body > div:nth-child(8) > ul > li:nth-child(2) > ul.l2").next();
-      	  	for (int i = 0; i <= ips.size(); i++) {
-           		String ipaddr = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(1) > li").text();
-            	String proxy = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(2) > li").text();
-            	String speed = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(8) > li").text();
-            	log.info("ip: {}----端口: {} ----速度：{} ", ipaddr, proxy, speed);
-        	}
-   		 }
+    ```
+    public void ipProxy() throws Exception {
+        Document doc = Jsoup.connect(URL_IP).userAgent(USER_AGENT).get();
+        Elements ips = doc.select("body > div:nth-child(8) > ul > li:nth-child(2) > ul.l2").next();
+        for (int i = 0; i <= ips.size(); i++) {
+            String ipaddr = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(1) > li").text();
+            String proxy = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(2) > li").text();
+            String speed = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(8) > li").text();
+            log.info("ip: {}----端口: {} ----速度：{} ", ipaddr, proxy, speed);
+        }
+     }
+    ```
 7. select选择器使用技巧，Chrome浏览器F12>选中元素>右键>copy selector即可
-
-[源码分享](https://github.com/yy1193889747/springboot-demo/blob/master/springboot-mybatis-thymeleaf/src/main/java/com/cy/task/Task.java)

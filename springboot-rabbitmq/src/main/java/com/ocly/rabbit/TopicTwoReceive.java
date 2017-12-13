@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RabbitListener(queues = "topic.two")
-public class TopiceTwoReceive {
+public class TopicTwoReceive {
     @RabbitHandler
     public void process(String str) {
         System.out.println("topictwo>>receive>>" + str);
