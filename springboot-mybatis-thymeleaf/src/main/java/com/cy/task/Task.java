@@ -35,7 +35,7 @@ public class Task {
     /**
      * 测试
      */
-    @Scheduled(fixedRate = 60 * 60 * 1000)
+    //@Scheduled(fixedRate = 60 * 60 * 1000)
     public void reportCurrentTime() throws Exception {
         long start = System.currentTimeMillis();
         asyncTask.taskOne();
@@ -47,21 +47,21 @@ public class Task {
     /**
      * 代理Ip爬取
      */
-    @Scheduled(fixedRate = 10 * 60 * 1000)
+    // @Scheduled(fixedRate = 10 * 60 * 1000)
     public void ipProxy() throws IOException {
         Document doc = Jsoup.connect(URL_IP).userAgent(USER_AGENT).get();
         Elements ips = doc.select("body > div:nth-child(8) > ul > li:nth-child(2) > ul.l2").next();
-        log.info("ip个数：{}",ips.size());
+        log.info("ip个数：{}", ips.size());
         for (int i = 0; i <= ips.size(); i++) {
             String ipaddr = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(1) > li").text();
             String proxy = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(2) > li").text();
             String speed = ips.select("ul:nth-child(" + (i + 2) + ") > span:nth-child(8) > li").text();
             log.info("ip: {}----端口: {} ----速度：{} ", ipaddr, proxy, speed);
-            if(!"".equals(proxy)){
+            if (!"".equals(proxy)) {
                 try {
-                    Jsoup.connect(URL_BLOG).proxy(ipaddr,Integer.parseInt(proxy)).ignoreHttpErrors(false).timeout(3000).get();
+                    Jsoup.connect(URL_BLOG).proxy(ipaddr, Integer.parseInt(proxy)).ignoreHttpErrors(false).timeout(3000).get();
                 } catch (IOException e) {
-                    log.info("不能用") ;
+                    log.info("不能用");
                 }
             }
         }
@@ -70,7 +70,7 @@ public class Task {
     /**
      * 百度今日热点爬取
      */
-    @Scheduled(fixedRate = 60 * 60 * 1000)
+    //@Scheduled(fixedRate = 60 * 60 * 1000)
     public void baidu() throws Exception {
         Document doc = Jsoup.connect(URL).get();
         Elements news = doc.select("#main > div.mainBody > div > table > tbody > tr").next();

@@ -2,3 +2,8 @@ spring:
   rabbitmq:
     username: ocly
     password: 123456
+  mail:
+      host: smtp.sina.com
+      username: xvzvvz@sina.com
+      password: qqaa11
+      default-encoding: UTF-8

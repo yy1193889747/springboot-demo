@@ -25,7 +25,7 @@ public class AllExceptionHandle {
             AllException allException = (AllException) exception;
             return ResultUtil.error(allException.getCode(), allException.getMessage());
         }else {
-            log.error("【系统异常】{}", exception);
+            log.error("【系统异常】{}", exception.getMessage());
             return ResultUtil.error(-1, "未知错误");
         }
     }

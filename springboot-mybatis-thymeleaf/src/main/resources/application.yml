@@ -45,7 +45,14 @@ spring:
 # 取消thymeleaf缓存
   thymeleaf:
     cache: false
+    mode: LEGACYHTML5
 # Redis 配置
   redis:
     host: localhost
     password:
+
+  mail:
+    host: smtp.163.com
+    username: xxoo@xxoo.com
+    password: xxoo
+    default-encoding: UTF-8
