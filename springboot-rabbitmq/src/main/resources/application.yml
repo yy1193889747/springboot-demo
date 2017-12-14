@@ -4,7 +4,7 @@ spring:
     password: 123456
   mail:
       host: smtp.sina.com
-      # 记得在页面开启SMTP
+      # 鍘婚〉闈㈠紑鍚疭MTP
       username:
       password:
       default-encoding: UTF-8

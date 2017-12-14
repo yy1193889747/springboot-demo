@@ -23,9 +23,9 @@ public class SendMail {
     /**
      * 发送文本邮件
      *
-     * @param subject
-     * @param to
-     * @param context
+     * @param subject 主题
+     * @param to 发送方地址
+     * @param context 内容
      */
 
     public void sendSimpleMail(String subject, String to, String context) {
@@ -43,7 +43,5 @@ public class SendMail {
         } catch (Exception e) {
             log.info("error:{}", from);
         }
-
-
     }
 }
