@@ -6,12 +6,12 @@
 5. 打开地址 http://localhost:15672/ guest guest
 6. 添加新用户 并 Set permission
 7. maven引入依赖包
-```
+    ```
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
-```
+    ```
 8. 请求响应模式, **注:(** 一对多是平均消费
 9. 发送对象时, **注:(** 对象实现序列化
 10. 主题模式
@@ -24,7 +24,7 @@
 2. 准备工作
     * 邮箱服务器地址：这里使用新浪邮箱，登录你的新浪邮箱，开启SMTP
     * 目标邮箱地址：可以是自己的qq邮箱，能接到邮件就行
-3. maven引入依赖包，应为要用到html模板
+3. maven引入依赖包，thymeleaf有提供htmlmail模板
    ```
       <!--mail-->
       <dependency>
