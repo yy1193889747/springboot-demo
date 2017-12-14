@@ -6,8 +6,11 @@ import com.ocly.rabbit.Sender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @SpringBootApplication
@@ -39,4 +42,12 @@ public class Application {
     public void topictwo() {
         send.topicSendTwo();
     }
+
+    @GetMapping("/")
+    public ModelAndView mailTemplate(ModelMap model) {
+        model.addAttribute("name","ocly");
+
+        return new ModelAndView("emailTemplate",model);
+    }
+
 }

@@ -22,4 +22,9 @@ public class sendMailTest {
     public void hello() throws Exception {
         sendMail.sendSimpleMail("aaaa","1193889747@qq.com","sdas");
     }
+
+    @Test
+    public void hellomaiTemplate() throws Exception {
+        sendMail.sendtemplateHtmlMail("你好，模板邮件加附件加图片","1193889747@qq.com","Bocly");
+    }
 }

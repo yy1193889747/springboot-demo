@@ -2,6 +2,9 @@ spring:
   rabbitmq:
     username: ocly
     password: 123456
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
   mail:
       host: smtp.sina.com
       # 去页面开启SMTP

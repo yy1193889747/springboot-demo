@@ -22,3 +22,4 @@
 ## springboot-rabbit
    * 2017-12-12 ：整合rabbit以及基本模式的使用
    * 2017-12-13 ：JavaMail的使用
+   * 2017-12-14 ：JavaMail,发送带模板、附件、图片的邮件
