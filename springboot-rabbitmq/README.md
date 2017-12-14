@@ -21,7 +21,10 @@
 1. 先来展示下收到邮件的效果图：
     
     ![](/springboot-rabbitmq/src/main/resources/static/img/QQ图片20171214160014.png "邮件效果图")
-2. maven引入依赖包，应为要用到html模板
+2. 准备工作
+    * 邮箱服务器地址：这里使用新浪邮箱，登录你的新浪邮箱，开启SMTP
+    * 目标邮箱地址：可以是自己的qq邮箱，能接到邮件就行
+3. maven引入依赖包，应为要用到html模板
    ```
       <!--mail-->
       <dependency>
@@ -35,4 +38,18 @@
           <artifactId>spring-boot-starter-thymeleaf</artifactId>
       </dependency>
    ```
-3. 编写相关类
+4. 配置相关信息
+  ```
+   spring:  
+     thymeleaf:
+       cache: false
+       mode: LEGACYHTML5
+     mail:
+         # 邮箱设置里可以找到
+         host: smtp.sina.com
+         # 去页面开启SMTP
+         username:
+         password:
+         default-encoding: UTF-8
+   ```
+5. 编写相关代码
