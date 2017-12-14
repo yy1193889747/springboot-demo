@@ -20,7 +20,7 @@
 # javaMail的使用
 1. 先来展示下收到邮件的效果图：
     
-    ![](/src/main/resources/static/img/QQ图片20171214160014.png "邮件效果图")
+    ![](/springboot-rabbitmq/src/main/resources/static/img/QQ图片20171214160014.png "邮件效果图")
 2. maven引入依赖包，应为要用到html模板
    ```
       <!--mail-->
