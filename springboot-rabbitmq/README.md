@@ -39,7 +39,7 @@
       </dependency>
    ```
 4. 配置相关信息
-  ```
+    ```
    spring:  
      thymeleaf:
        cache: false
@@ -51,5 +51,5 @@
          username:
          password:
          default-encoding: UTF-8
-   ```
+    ```
 5. 编写相关代码
