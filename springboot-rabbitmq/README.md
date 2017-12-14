@@ -52,4 +52,4 @@
          password:
          default-encoding: UTF-8
     ```
-5. 编写相关代码
+5. 编写相关[代码](https://github.com/yy1193889747/springboot-demo/blob/master/springboot-rabbitmq/src/main/java/com/ocly/util/SendMail.java)
