@@ -1,7 +1,5 @@
 package com.cy.config;
 
-import com.cy.entity.SysPermission;
-import com.cy.entity.SysRole;
 import com.cy.entity.UserInfo;
 import com.cy.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
@@ -29,22 +27,16 @@ public class AuthCustomRealm extends AuthorizingRealm {
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         UserInfo userInfo  = (UserInfo)principalCollection.getPrimaryPrincipal();
-        for(SysRole role:userInfo.getRoleList()){
-            authorizationInfo.addRole(role.getRole());
-            for(SysPermission p:role.getPermissions()){
-                authorizationInfo.addStringPermission(p.getPermission());
-            }
-        }
         return authorizationInfo;
     }
 
     /*主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确。*/
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println("MyShiroRealm.doGetAuthenticationInfo()");
         //获取用户的输入的账号.
-        String username = (String)authenticationToken.getPrincipal();
-        System.out.println(authenticationToken.getCredentials());
+        String username = (String)token.getPrincipal();
+        System.out.println(token.getCredentials());
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
         UserInfo userInfo = userService.findByUsername(username);
