@@ -7,28 +7,32 @@
 </head>
 <body class="container">
 <br/>
-<h1>用户列表</h1>
+<h1 style="text-align: center;">用户列表</h1>
 <br/><br/>
 <div class="with:80%">
     <table class="table table-hover">
         <thead>
         <tr>
             <th>#</th>
-            <th>User Name</th>
+            <th>UserName</th>
+            <th>Name</th>
             <th>Password</th>
-            <th>Age</th>
+            <th>Salt</th>
+            <th>State</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
         <tr  th:each="user : ${userList}">
-            <th scope="row" th:text="${user.id}">1</th>
+            <th scope="row" th:text="${user.uid}">1</th>
+            <td th:text="${user.username}">neo</td>
             <td th:text="${user.name}">neo</td>
             <td th:text="${user.password}">Otto</td>
-            <td th:text="${user.age}">6</td>
-                <td><a th:href="@{/toEdit(id=${user.id})}">edit</a></td>
-            <td><a th:href="@{/delete(id=${user.id})}">delete</a></td>
+            <td th:text="${user.salt}">6</td>
+            <td th:text="${user.state}">6</td>
+                <td><a th:href="@{/toEdit(id=${user.uid})}">edit</a></td>
+            <td><a th:href="@{/delete(id=${user.uid})}">delete</a></td>
         </tr>
         </tbody>
     </table>

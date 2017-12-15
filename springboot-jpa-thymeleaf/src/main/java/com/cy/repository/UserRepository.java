@@ -1,6 +1,6 @@
 package com.cy.repository;
 
-import com.cy.entity.User;
+import com.cy.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 2017/11/22 16:45
  */
 
-public interface UserRepository extends JpaRepository<User,Integer>{
+public interface UserRepository extends JpaRepository<UserInfo,Integer>{
 
-     User findByid(Long id);
+     UserInfo findByUid(int uid);
 
-     Long deleteByid(Long id);
+     UserInfo findByUsername(String username);
+
+     int deleteByUid(int uid);
 
 }

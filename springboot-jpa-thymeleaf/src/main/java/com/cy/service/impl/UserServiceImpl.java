@@ -1,6 +1,6 @@
 package com.cy.service.impl;
 
-import com.cy.entity.User;
+import com.cy.entity.UserInfo;
 import com.cy.repository.UserRepository;
 import com.cy.service.UserService;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * 2017/11/22 16:50
  */
 @Service
-@Transactional
+
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -30,32 +30,33 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public List<User> userList() {
+    public List<UserInfo> userList() {
         return userRepository.findAll();
     }
 
     @Override
-    public User getUser(Long id) {
-        String key = "user_" + id;
-        ValueOperations<String, User> operations = redisTemplate.opsForValue();
+    public UserInfo getUser(int uid) {
+        String key = "UserInfo_" + uid;
+        ValueOperations<String, UserInfo> operations = redisTemplate.opsForValue();
         // 缓存存在
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
-            User user = operations.get(key);
-            LOGGER.info("从缓存中获取用户信息>> " + user.toString());
-            return user;
+            UserInfo UserInfo = operations.get(key);
+            LOGGER.info("从缓存中获取用户信息>> " + UserInfo.toString());
+            return UserInfo;
         }
         // 插入缓存
-        User user = userRepository.findByid(id);
-        operations.set(key, user, 100, TimeUnit.SECONDS);
-        LOGGER.info("用户信息插入缓存 >> " + user.toString());
-        return user;
+        UserInfo UserInfo = userRepository.findByUid(uid);
+        operations.set(key, UserInfo, 100, TimeUnit.SECONDS);
+        LOGGER.info("用户信息插入缓存 >> " + UserInfo.toString());
+        return UserInfo;
     }
 
+    @Transactional
     @Override
-    public Long deleteUser(Long id) {
-        Long ret = userRepository.deleteByid(id);
-        String key = "user_" + id;
+    public int deleteUser(int id) {
+        int ret = userRepository.deleteByUid(id);
+        String key = "UserInfo_" + id;
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
@@ -65,19 +66,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public UserInfo saveUser(UserInfo UserInfo) {
+        return userRepository.save(UserInfo);
     }
 
     @Override
-    public User editUser(User user) {
-        User user1 = userRepository.save(user);
-        String key = "user_" + user.getId();
+    public UserInfo editUser(UserInfo UserInfo) {
+        UserInfo UserInfo1 = userRepository.save(UserInfo);
+        String key = "UserInfo_" + UserInfo.getUid();
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            LOGGER.info("从缓存中删除用户 >> " + user1.toString());
+            LOGGER.info("从缓存中删除用户 >> " + UserInfo1.toString());
         }
-        return user1;
+        return UserInfo1;
+    }
+
+    @Override
+    public UserInfo findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

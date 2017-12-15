@@ -1,6 +1,6 @@
 package com.cy.service;
 
-import com.cy.entity.User;
+import com.cy.entity.UserInfo;
 
 import java.util.List;
 
@@ -10,13 +10,15 @@ import java.util.List;
  */
 public interface UserService {
 
-    public List<User> userList();
+    List<UserInfo> userList();
 
-    public User getUser(Long id);
+    UserInfo getUser(int id);
 
-    public Long deleteUser(Long id);
+    int deleteUser(int id);
 
-    public User saveUser(User user);
+    UserInfo saveUser(UserInfo user);
 
-    public User editUser(User user);
+    UserInfo editUser(UserInfo user);
+
+    UserInfo findByUsername(String username);
 }
