@@ -1,19 +1,14 @@
 package com.cy.task;
 
-import com.mysql.jdbc.PerVmServerConfigCacheFactory;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.Formatter;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.Proxy;
 
 /**
  * Created by cy
@@ -84,9 +79,10 @@ public class Task {
         }
     }
 
+
     public static void main(String[] args) throws Exception {
         Task task = new Task();
-        task.ipProxy();
+        task.baidu();
 
     }
     // @Scheduled(cron="0/5 * *  * * ? ") //每5秒执行一次
