@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class UserController {
 
 
     @RequestMapping("/403")
-    public String unauthorizedRole(){
+    public @ResponseBody String unauthorizedRole(){
         System.out.println("------没有权限-------");
         return "403";
     }
