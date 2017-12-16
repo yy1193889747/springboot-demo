@@ -5,6 +5,7 @@ import com.cy.service.UserService;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,8 +66,9 @@ public class UserController {
     @RequestMapping("/403")
     public @ResponseBody String unauthorizedRole(){
         System.out.println("------没有权限-------");
-        return "403";
+        return "40ss3";
     }
+    @RequiresRoles("admin")
     @RequestMapping({"/","/index"})
     public String index(){
         return"/index";

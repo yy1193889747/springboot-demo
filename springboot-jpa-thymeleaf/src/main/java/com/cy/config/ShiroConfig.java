@@ -47,10 +47,8 @@ public class ShiroConfig {
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
         // 未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/qweqe");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-
-
 
         return shiroFilterFactoryBean;
 
@@ -109,10 +107,10 @@ public class ShiroConfig {
     createSimpleMappingExceptionResolver() {
         SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
         Properties mappings = new Properties();
-        mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
-        mappings.setProperty("UnauthorizedException","403");
+        mappings.setProperty("DatabaseException", "500");//数据库异常处理
+        mappings.setProperty("UnauthorizedException","errors"); //设置已认证未授权的页面
         r.setExceptionMappings(mappings);  // None by default
-        r.setDefaultErrorView("error");    // No default
+        r.setDefaultErrorView("500");    // No default
         r.setExceptionAttribute("ex");     // Default is "exception"
         //r.setWarnLogCategory("example.MvcLogger");     // No default
         return r;
