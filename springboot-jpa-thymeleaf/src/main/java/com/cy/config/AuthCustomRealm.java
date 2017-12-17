@@ -27,7 +27,7 @@ public class AuthCustomRealm extends AuthorizingRealm {
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         UserInfo userInfo  = (UserInfo)principalCollection.getPrimaryPrincipal();
-        authorizationInfo.addRole("admin");
+        authorizationInfo.addRole("aa");
         return authorizationInfo;
     }
 
