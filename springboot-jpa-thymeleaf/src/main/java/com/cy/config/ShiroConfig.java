@@ -1,17 +1,20 @@
 package com.cy.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * Created by cy
@@ -63,12 +66,12 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
         securityManager.setRealm(customRealm());
-//        // 注入记住我管理器;
-//        securityManager.setRememberMeManager(rememberMeManager());
+        // 注入记住我管理器;
+        securityManager.setRememberMeManager(rememberMeManager());
 //        //设置sessionManager
 //        securityManager.setSessionManager(defaultWebSessionManager());
 //        //设置缓存
-//        securityManager.setCacheManager(cacheManager());
+        securityManager.setCacheManager(cacheManager());
         return securityManager;
     }
 
@@ -103,6 +106,51 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+    /**
+     * cookie对象;
+     *
+     * @return
+     */
+    @Bean
+    public SimpleCookie rememberMeCookie() {
+        // 这个参数是cookie的名称，对应前端的checkbox 的name = rememberMe
+        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+        // <!-- 记住我cookie生效时间30天 ,单位秒;-->
+        simpleCookie.setMaxAge(259200);
+        return simpleCookie;
+    }
+    /**
+     * cookie管理对象;
+     *
+     * @return
+     */
+    @Bean
+    public CookieRememberMeManager rememberMeManager() {
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(rememberMeCookie());
+        //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
+        cookieRememberMeManager.setCipherKey(Base64.decode("ztLX7sun"));
+        return cookieRememberMeManager;
+    }
+
+    /**
+     * ShiroDialect，为了在thymeleaf里使用shiro的标签的bean
+     *
+     * @return
+     */
+//    @Bean
+//    public ShiroDialect shiroDialect() {
+//        return new ShiroDialect();
+//    }
+
+
+    @Bean
+    public EhCacheManager cacheManager() {
+        EhCacheManager cacheManager = new EhCacheManager();
+        cacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
+        return cacheManager;
     }
 
 //    @Bean(name="simpleMappingExceptionResolver")

@@ -66,9 +66,8 @@ public class UserController {
     @RequestMapping("/403")
     public @ResponseBody String unauthorizedRole(){
         System.out.println("------没有权限-------");
-        return "40ss3";
+        return "403";
     }
-    @RequiresRoles("admin")
     @RequestMapping({"/","/index"})
     public String index(){
         return"/index";
