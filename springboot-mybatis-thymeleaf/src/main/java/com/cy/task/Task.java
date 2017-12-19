@@ -26,7 +26,6 @@ public class Task {
     private final static String URL_BLOG = "http://blog.csdn.net/yy1193889747/article/details/78785776";
     private final static String USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Mobile Safari/537.36";
 
-
     /**
      * 测试
      */

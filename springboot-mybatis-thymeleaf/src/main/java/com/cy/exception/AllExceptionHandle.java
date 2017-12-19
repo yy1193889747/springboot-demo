@@ -6,12 +6,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Created by cy
  * 2017/12/11 8:37
  */
-@ControllerAdvice
+@RestControllerAdvice
 @Log4j2
 public class AllExceptionHandle {
 
@@ -19,7 +20,6 @@ public class AllExceptionHandle {
      * 处理全局异常
      */
     @ExceptionHandler(Exception.class)
-    @ResponseBody
     public Result handlerGlobalException(Exception exception){
         if (exception instanceof AllException) {
             AllException allException = (AllException) exception;
