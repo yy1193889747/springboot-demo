@@ -10,6 +10,8 @@
 * [Async异步执行](#async异步执行)
 * [Swagger接口文档生成](#swagger接口文档生成)
 * [jsoup简单爬取代理ip](#jsoup简单爬取代理ip)
+* [jsoup使用](#jsoup使用)
+* [java安装网站ssl证书](#java安装网站ssl证书)
 
 # springboot整合mybatis
 1. 首先pom文件引入包
@@ -298,3 +300,12 @@
     Jsoup.connect("").execute().cookies();
 
 ```
+# java安装网站ssl证书
+1. 下载网站证书，访问网站>chrom按F12
+2. 点击Security>点击view certificate>详细信息>复制到文件
+3. 点击下一步>选择Base64编码>选择路径保存>D://abc.cer
+4. cmd切换到java/jre的/lib/security/下
+5. `keytool -import -alias abc -keystore cacerts -file D://abc.cer`
+6. 库密钥口令输入：changeit
+7. 是
+8. 查看证书`keytool -list -keystore cacerts -alias abc`
