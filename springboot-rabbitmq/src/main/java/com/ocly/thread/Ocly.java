@@ -1,6 +1,4 @@
-package com.thread;
-
-import org.springframework.messaging.core.AbstractDestinationResolvingMessagingTemplate;
+package com.ocly.thread;
 
 /**
  * Created by cy
@@ -8,6 +6,7 @@ import org.springframework.messaging.core.AbstractDestinationResolvingMessagingT
  */
 public class Ocly extends Thread {
 
+    // thread stop use flag
     volatile  boolean isok = true;
     @Override
     public void run() {
