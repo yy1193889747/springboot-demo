@@ -1,22 +1,24 @@
 package com.thread;
 
+import org.springframework.messaging.core.AbstractDestinationResolvingMessagingTemplate;
+
 /**
  * Created by cy
  * 2017/12/25 10:05
  */
 public class Ocly extends Thread {
 
+    volatile  boolean isok = true;
     @Override
     public void run() {
         System.out.println(getName() + " is actor");
         int count = 0;
-        Boolean isok = true;
         while (isok) {
             System.out.println(getName() + " appear " + (++count));
-            if (count == 100) {
+            if (count == 40) {
                 isok = false;
             }
-            if (count % 20 == 0) {
+            if (count % 5 == 0) {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
@@ -28,22 +30,24 @@ public class Ocly extends Thread {
         System.out.println(getName() + " play over");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Thread a = new Ocly();
         a.setName("Ocly");
         a.start();
-        Thread b = new Thread(new Wack(),"Wack");
+        Wack wack = new Wack();
+        Thread b = new Thread(wack,"Wack");
         b.start();
+        Thread.sleep(3000);
+        wack.isok=false;
     }
 }
 
 class Wack implements Runnable{
-
+    volatile boolean isok = true;
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + " is actor");
         int count = 0;
-        Boolean isok = true;
         while (isok) {
             System.out.println(Thread.currentThread().getName() + " appear " + (++count));
             if (count == 100) {
