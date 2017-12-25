@@ -1,5 +1,6 @@
 package com.ocly.io;
 
+import java.awt.*;
 import java.io.*;
 
 /**
@@ -48,6 +49,7 @@ public class IOUtils {
         }
         in.close();
     }
+
     /**
      * 写到文件
      *
@@ -55,46 +57,108 @@ public class IOUtils {
      */
     public static void writeHex(String filename) throws IOException {
         // 没有就创建，有的话 删了再创建，true则是追加
-        FileOutputStream out = new FileOutputStream(filename,true);
+        FileOutputStream out = new FileOutputStream(filename, true);
         out.write('A');
+        out.write(10);
         //每次写一个字节
         out.close();
         IOUtils.printHex(filename);
     }
 
     /**
-     * 拷贝文件
+     * 拷贝文件 批量+缓存
+     *
      * @param fromfile
      * @param tofile
      * @throws IOException
      */
     public static void copyFile(File fromfile, File tofile) throws IOException {
-        if(!fromfile.exists()){
+        if (!fromfile.exists()) {
             throw new IllegalArgumentException("不存在");
         }
-        if(!fromfile.isFile()){
+        if (!fromfile.isFile()) {
             throw new IllegalArgumentException("不是文件");
         }
         FileInputStream in = new FileInputStream(fromfile);
         FileOutputStream out = new FileOutputStream(tofile);
         byte[] buf = new byte[8 * 1024];
         int b;
-        while((b=in.read(buf,0,buf.length))!=-1){
-            out.write(buf,0,b);
-            out.flush();//字节流最好加上
+     /*   public int read(byte b[]) throws IOException {
+            return readBytes(b, 0, b.length);
+        }*/
+        while ((b = in.read(buf)) != -1) {
+            out.write(buf, 0, b);
         }
+        out.flush();//字节流最好加上
         in.close();
         out.close();
     }
 
+    /**
+     * 拷贝文件 buff缓存
+     *
+     * @param fromfile
+     * @param tofile
+     * @throws IOException
+     */
+    public static void copyFileByBuff(File fromfile, File tofile) throws IOException {
+        if (!fromfile.exists()) {
+            throw new IllegalArgumentException("不存在");
+        }
+        if (!fromfile.isFile()) {
+            throw new IllegalArgumentException("不是文件");
+        }
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(fromfile));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(tofile));
+        int b;
+        while ((b = bis.read()) != -1) {
+            bos.write(b);
+        }
+        //bos.flush();//字节流最好加上
+        bis.close();
+        bos.close();
+    }
+
+    /**
+     * 写到文件,dataoutputstream
+     *
+     * @param filename
+     */
+    public static void writeInfile(String filename) throws IOException {
+        // 没有就创建，有的话 删了再创建，true则是追加
+        DataOutputStream out = new DataOutputStream(new FileOutputStream(filename));
+        out.writeInt(10);
+        out.writeUTF("你好"); // utf-8
+        out.writeChars("你好"); // utf-16
+        out.close();
+        IOUtils.printHex("C:\\Users\\Administrator\\Desktop\\hhh.txt");
+    }
+
+    public static void readfile(String filename) throws IOException {
+        FileInputStream in = new FileInputStream(filename);
+        InputStreamReader is = new InputStreamReader(in,"utf-8");
+        int b;
+        while ((b=is.read())!=-1){
+            System.out.print((char)b);
+        }
+        in.close();
+        is.close();
+    }
     public static void main(String[] args) {
         try {
 //            IOUtils.writeHex("H:\\mavenpro\\springboot-demo\\springboot-rabbitmq\\src\\main\\resources\\out.dat");
-            IOUtils.copyFile(new File("H:\\mavenpro\\springboot-demo\\springboot-rabbitmq\\src\\main\\resources\\banner.txt"),new File
-                    ("H:\\mavenpro\\springboot-demo\\springboot-rabbitmq\\src\\main\\resources\\out.txt"));
+//            IOUtils.copyFile(new File("H:\\mavenpro\\springboot-demo\\springboot-rabbitmq\\src\\main\\resources\\banner.txt"),new File
+//                    ("H:\\mavenpro\\springboot-demo\\springboot-rabbitmq\\src\\main\\resources\\out.txt"));
 //            IOUtils.printHex("C:\\Users\\Administrator\\Desktop\\hhh.txt");
 //            System.out.println("");
 //            IOUtils.printHexArray("C:\\Users\\Administrator\\Desktop\\hhh.txt");
+//            IOUtils.writeInfile("C:\\\\Users\\\\Administrator\\\\Desktop\\\\hhh.txt");
+
+//            Long start = System.currentTimeMillis();
+//            IOUtils.copyFile(new File("C:\\Users\\Administrator\\Desktop\\1.mp3"), new File("C:\\Users\\Administrator\\Desktop\\4.mp3"));
+//            Long end = System.currentTimeMillis();
+//            System.out.println(end - start);
+            IOUtils.readfile("C:\\Users\\Administrator\\Desktop\\hhh.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
