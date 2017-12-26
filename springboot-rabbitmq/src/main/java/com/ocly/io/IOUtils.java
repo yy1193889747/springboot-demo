@@ -120,6 +120,43 @@ public class IOUtils {
     }
 
     /**
+     * 拷贝文本文件 buff缓存
+     *
+     * @param fromfile
+     * @param tofile
+     * @throws IOException
+     */
+    public static void copytxtFileByBuff(File fromfile, File tofile) {
+        if (!fromfile.exists()) {
+            throw new IllegalArgumentException("不存在");
+        }
+        if (!fromfile.isFile()) {
+            throw new IllegalArgumentException("不是文件");
+        }
+        try {
+            InputStreamReader is = new InputStreamReader(new FileInputStream(fromfile));
+            OutputStreamWriter os = new OutputStreamWriter(new FileOutputStream(tofile));
+
+            BufferedReader bs = new BufferedReader(is);
+//            BufferedWriter bw = new BufferedWriter(os);
+            PrintWriter pw = new PrintWriter(os,true);
+            String input;
+            while ((input = bs.readLine()) != null) {
+                pw.println(input);
+            }
+//            bw.flush();
+//            bw.close();
+            pw.close();
+            bs.close();
+            os.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        }
+    }
+
+    /**
      * 写到文件,dataoutputstream
      *
      * @param filename
@@ -136,14 +173,15 @@ public class IOUtils {
 
     public static void readfile(String filename) throws IOException {
         FileInputStream in = new FileInputStream(filename);
-        InputStreamReader is = new InputStreamReader(in,"utf-8");
+        InputStreamReader is = new InputStreamReader(in, "utf-8");
         int b;
-        while ((b=is.read())!=-1){
-            System.out.print((char)b);
+        while ((b = is.read()) != -1) {
+            System.out.print((char) b);
         }
         in.close();
         is.close();
     }
+
     public static void main(String[] args) {
         try {
 //            IOUtils.writeHex("H:\\mavenpro\\springboot-demo\\springboot-rabbitmq\\src\\main\\resources\\out.dat");
@@ -158,8 +196,8 @@ public class IOUtils {
 //            IOUtils.copyFile(new File("C:\\Users\\Administrator\\Desktop\\1.mp3"), new File("C:\\Users\\Administrator\\Desktop\\4.mp3"));
 //            Long end = System.currentTimeMillis();
 //            System.out.println(end - start);
-            IOUtils.readfile("C:\\Users\\Administrator\\Desktop\\hhh.txt");
-        } catch (IOException e) {
+            IOUtils.copytxtFileByBuff(new File("C:\\Users\\Administrator\\Desktop\\hhh.txt"), new File("C:\\Users\\Administrator\\Desktop\\hhhs.txt"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
