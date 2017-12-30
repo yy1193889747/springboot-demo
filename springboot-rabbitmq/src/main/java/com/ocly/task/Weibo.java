@@ -5,7 +5,6 @@ import com.ocly.util.RuoKuai;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.jsoup.helper.HttpConnection;
 import sun.misc.BASE64Encoder;
 
 import javax.script.Invocable;
@@ -13,9 +12,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,10 +20,7 @@ import java.util.Map;
  * 2017/12/30 11:11
  */
 public class Weibo {
-    private String username;    //登录帐号(明文)
     private String password;    //登录密码(明文)
-
-
     private String su;          //登录帐号(Base64加密)
     private String sp;          //登录密码(各种参数RSA加密后的密文)
     private String servertime;  //初始登录时，服务器返回的时间戳,用以密码加密以及登录用
@@ -34,26 +28,24 @@ public class Weibo {
     private String pcid;       //获取图片的参数
     private String pubkey;   //初始登录时，服务器返回的RSA公钥
 
-    private String errInfo;     //登录失败时的错误信息
-    private String location;    //登录成功后的跳转连接
-
 
     public void login(String usename, String password, String text) throws IOException, InterruptedException {
-        this.username = usename;
         this.password = password;
+        //Base64编码用户名
         su = new BASE64Encoder().encode(usename.getBytes());
         String url = "http://login.sina.com.cn/sso/prelogin.php?entry=weibo&callback=sinaSSOController.preloginCallBack&su=" + su + "&rsakt=mod&checkpin=1&client=ssologin.js(v1.4.18)&_=" +
                 getTimestamp();
         Connection.Response execute = Jsoup.connect(url).ignoreContentType(true).execute();
+        //获取返回数据
         String body = execute.body();
-        System.out.println(body);
+        //获取返回cookie
+        Map<String, String> photocookie = execute.cookies();
         JSONObject jsonObject = JSONObject.parseObject(StringUtils.substringBetween(body, "(", ")"));
         servertime = jsonObject.getString("servertime");
         nonce = jsonObject.getString("nonce");
         pubkey = jsonObject.getString("pubkey");
         pcid = jsonObject.getString("pcid");
         encodePwd();
-        Map<String, String> photocookie = execute.cookies();
         url = "http://login.sina.com.cn/cgi/pin.php?r=54474015&s=0&p=" + pcid;
         byte[] bytes = Jsoup.connect(url).ignoreContentType(true).cookies(photocookie).execute().bodyAsBytes();
         String code = RuoKuai.getCode(bytes);
@@ -75,13 +67,13 @@ public class Weibo {
         url = StringUtils.substringBetween(body1, "location.replace('", "'");
         Connection.Response execute2 = Jsoup.connect(url).cookies(cookies).followRedirects(false).ignoreContentType(true).execute();
         Map<String, String> cookies1 = execute2.cookies();
+        //从返回协议头中获取location，重定向地址，一般是固定
         Map<String, String> headers = execute2.headers();
         System.out.println(headers.toString());
         System.out.println(cookies1.toString());
         url = "http://weibo.com/ajaxlogin.php?framelogin=1&callback=parent.sinaSSOController.feedBackUrlCallBack&sudaref=login.sina.com.cn";
         String body2 = Jsoup.connect(url).cookies(cookies1).ignoreContentType(true).execute().body();
         String uid = StringUtils.substringBetween(body2, "uniqueid\":\"", "\",\"userid");
-
         String referer = "https://weibo.com/u/" + uid + "/home";
 
         url = "https://weibo.com/aj/mblog/add?ajwvr=6&__rnd=" + getTimestamp();
@@ -124,7 +116,6 @@ public class Weibo {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
         Weibo weibo = new Weibo();
         weibo.login("", "", "Jsoup_Login_Success");
 
