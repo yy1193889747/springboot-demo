@@ -1,6 +1,8 @@
 package com.ocly.generic;
 
 /**
+ * 泛型
+ *
  * Created by cy
  * 2017/12/26 14:49
  */

@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,9 +46,13 @@ public class Application {
 
     @GetMapping("/")
     public ModelAndView mailTemplate(ModelMap model) {
-        model.addAttribute("name","ocly");
+        model.addAttribute("name", "ocly");
 
-        return new ModelAndView("emailTemplate",model);
+        return new ModelAndView("emailTemplate", model);
     }
 
+    @PostMapping(value = "/test")
+    public String helloall(String name, String age) {
+        return "Hello " + age + " de " + name;
+    }
 }

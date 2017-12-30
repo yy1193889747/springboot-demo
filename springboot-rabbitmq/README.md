@@ -53,3 +53,6 @@
          default-encoding: UTF-8
     ```
 5. 编写相关[代码](https://github.com/yy1193889747/springboot-demo/blob/master/springboot-rabbitmq/src/main/java/com/ocly/util/SendMail.java)
+
+# mvn命令
+`mvn install:install-file -Dfile=D:/jar/xxx.jar -DgroupId=org.csource -DartifactId=fastdfs-client-java -Dversion=1.25 -Dpackaging=jar`
