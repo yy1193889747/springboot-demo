@@ -60,3 +60,9 @@
 # Docker study
 1. docker网络
  * `apt-get install bridge-utils` 安装桥接查看工具
+ * `brctl show` 查看桥接信息
+ * `ifconfig docker0 192.168.200.1 netmask 255.255.255.0` 修改默认ip段
+ * `service docker restart` 修改完重启配置
+ * `brctl addbr br0` 添加虚拟网桥
+ * `同上` 设置br0ip段
+ * `vi /etc/default/docker `  DOCKER_OPTS= "b=br0"
