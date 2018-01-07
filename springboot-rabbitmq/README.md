@@ -56,3 +56,7 @@
 
 # mvn命令
 `mvn install:install-file -Dfile=D:/jar/xxx.jar -DgroupId=org.csource -DartifactId=fastdfs-client-java -Dversion=1.25 -Dpackaging=jar`
+
+# Docker study
+1. docker网络
+ * `apt-get install bridge-utils` 安装桥接查看工具
