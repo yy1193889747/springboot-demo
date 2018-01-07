@@ -66,3 +66,9 @@
  * `brctl addbr br0` 添加虚拟网桥
  * `同上` 设置br0ip段
  * `vi /etc/default/docker `  DOCKER_OPTS= "b=br0"
+ *  DOCKER_OPTS= " -icc=false -iptables=true" 允许link互联
+ * `iptables -I DOCKER -s 172.17.0.5 -d 172.17.0.4 -p tcp --dport 80 -j DROP` 添加规则拒绝访问端口
+ * `iptables -nL --line-numbers`查看行号
+ * `iptables -D DOCKER 1` 删除iptables规则
+2. 数据卷
+ * `docker inspect 9d` 查看容器信息
