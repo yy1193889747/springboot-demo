@@ -72,3 +72,7 @@
  * `iptables -D DOCKER 1` 删除iptables规则
 2. 数据卷
  * `docker inspect 9d` 查看容器信息
+ * `VOLUME ["/volume1","/volume2"]` Dockerfile指定数据卷
+ * `docker run --volumes-from 55 -it alpine` 数据卷容器
+ * `docker rm 55 -v` 删除容器及数据卷，只要被别的容器引用就删不了，即便容器停止
+ * `docker run --volumes-from 55 -it -v /backup:/backup alpine tar cvf /backup/data.tar /volume1` 备份数据
