@@ -58,6 +58,7 @@
 `mvn install:install-file -Dfile=D:/jar/xxx.jar -DgroupId=org.csource -DartifactId=fastdfs-client-java -Dversion=1.25 -Dpackaging=jar`
 
 # Docker study
+/var/lib/docker/ docker默认路径
 1. docker网络
  * `apt-get install bridge-utils` 安装桥接查看工具
  * `brctl show` 查看桥接信息
@@ -76,3 +77,8 @@
  * `docker run --volumes-from 55 -it alpine` 数据卷容器
  * `docker rm 55 -v` 删除容器及数据卷，只要被别的容器引用就删不了，即便容器停止
  * `docker run --volumes-from 55 -it -v /backup:/backup alpine tar cvf /backup/data.tar /volume1` 备份数据
+ * `docker stata 9d` 监控容器状态
+3. docker命令
+ * `docker rm 55 -f` 删除正在运行的容器
+ * `docker rm -f $(docker ps -a -q)` 删除正在运行的所有容器
+ 
