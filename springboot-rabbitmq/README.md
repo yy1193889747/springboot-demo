@@ -17,6 +17,10 @@
 10. 主题模式
 11. 发布订阅模式（广播模式）
 
+# ico
+1. `spring.mvc.favicon.enabled = false`
+2. `<link rel="icon" type="image/x-icon" href="/static/favicon.ico">`
+
 # javaMail的使用
 1. 先来展示下收到邮件的效果图：
     
