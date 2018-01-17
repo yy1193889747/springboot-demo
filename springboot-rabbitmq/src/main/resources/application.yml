@@ -11,3 +11,4 @@ spring:
       username:
       password:
       default-encoding: UTF-8
+      port:

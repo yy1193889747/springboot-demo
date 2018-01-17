@@ -86,3 +86,8 @@
  * `docker rm 55 -f` 删除正在运行的容器
  * `docker rm -f $(docker ps -a -q)` 删除正在运行的所有容器
  
+ # linux 命令
+ * `cat /proc/cpuinfo | grep "physical id" | uniq | wc -l` 查看CPU核数
+ 
+ 
+ 
