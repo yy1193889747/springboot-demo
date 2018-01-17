@@ -87,7 +87,11 @@
  * `docker rm -f $(docker ps -a -q)` 删除正在运行的所有容器
  
  # linux 命令
- * `cat /proc/cpuinfo | grep "physical id" | uniq | wc -l` 查看CPU核数
+ * `cat /proc/cpuinfo | grep "physical id" | uniq | wc -l` 查看CPU个数
+ * `cat /proc/cpuinfo | grep "cpu cores" | uniq` 查看CPU核数
+ * `cat /proc/cpuinfo | grep 'model name' |uniq` 查看CPU型号
+ * `cat /proc/meminfo | grep MemTotal` 查看内存大小
+ * `fdisk -l | grep Disk` 查看硬盘大小
  
  
  
