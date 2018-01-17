@@ -18,6 +18,7 @@
 11. 发布订阅模式（广播模式）
 
 # ico
+将ico命名为favicon.ico 放到resources下即可
 1. `spring.mvc.favicon.enabled = false`
 2. `<link rel="icon" type="image/x-icon" href="/static/favicon.ico">`
 
