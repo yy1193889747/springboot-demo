@@ -86,6 +86,7 @@
 3. docker命令
  * `docker rm 55 -f` 删除正在运行的容器
  * `docker rm -f $(docker ps -a -q)` 删除正在运行的所有容器
+ * `-v /etc/timezone:/etc/timezone` 直接挂在时区即可
  
  # linux 命令
  * `cat /proc/cpuinfo | grep "physical id" | uniq | wc -l` 查看CPU个数
