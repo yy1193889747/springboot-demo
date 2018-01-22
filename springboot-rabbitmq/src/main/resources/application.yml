@@ -12,3 +12,6 @@ spring:
       password:
       default-encoding: UTF-8
       port:
+  http:
+    multipart:
+      max-file-size: 2Mb
