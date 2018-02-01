@@ -40,4 +40,5 @@
    * 2018-01-24 ：[zing-gallery](http://111.231.86.225:3000/)
    * 2018-01-25 ：SpringClound初探
    * 2018-01-30 ：百度文字识别API调用
+   * 2018-01-30 ：[vue2初探](https://github.com/yy1193889747/vue-webpack-todo)
    
