@@ -3,6 +3,7 @@
    * 实现增删改查功能
    * 加入redis缓存（简单）
    * 2017-12-15 ：整合Shiro
+   * 2018-07-01 ：Builder模式构造类
    
 ## springboot-mybatis-thymeleaf
    * 基于xml配置整合mybatis
