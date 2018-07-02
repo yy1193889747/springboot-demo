@@ -50,7 +50,7 @@ public class NutritionFacts {
 
     public static void main(String[] args) {
 
-        Builder fat = new Builder(240, 100).calories(20).fat(100);
+        NutritionFacts fat = new NutritionFacts.Builder(240, 100).calories(20).fat(100).build();
     }
 
 }
