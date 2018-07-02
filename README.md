@@ -4,6 +4,7 @@
    * 加入redis缓存（简单）
    * 2017-12-15 ：整合Shiro
    * 2018-07-01 ：Builder模式构造类
+   * 2018-07-01 ：要优先使用基本类型而不是装箱基本类型，要担心无意识的自动装箱
    
 ## springboot-mybatis-thymeleaf
    * 基于xml配置整合mybatis
